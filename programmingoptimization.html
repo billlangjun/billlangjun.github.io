@@ -1,0 +1,127 @@
+<html>
+	<head>
+        <title>Programming Optimization Skills of Jun Lang</title>
+		<meta name="keywords" content="Lang Jun, Jun Lang, Bill Lang, billlangjun" /> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="Stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+		<center><font style="font-family: fantasy; font-size: x-large; 
+font-weight: bold; color: #FF6600">Homepage of Jun Lang</font><br><font style="font-family: 华文行楷; font-size: small; 
+font-weight: normal; color: blue">Living without an aim is like sailing without a compass. </font></center>
+		<div class="content">
+        
+<h1 id="toc_1">C++ Optimization Skills</h1>
+<p>
+<a href="./wiki.html">Return</a>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">C++ Optimization Skills</a>
+<ul>
+<li><a href="#toc_1.1">Little Skills</a>
+<ul>
+<li><a href="#toc_1.1.1">注意CPU的0寄存器</a>
+<li><a href="#toc_1.1.2">for循环判断条件里别用赋值语句</a>
+<li><a href="#toc_1.1.3"> 能在循环外作的尽量在循环外做</a>
+<li><a href="#toc_1.1.4">对递归或知道指定结果的，可直接指定常数返回</a>
+</ul>
+</ul>
+</ul>
+</div>
+</p>
+
+<h2 id="toc_1.1">Little Skills</h2>
+<h3 id="toc_1.1.1">注意CPU的0寄存器</h3>
+<pre>
+CPU里有个用于存放0的寄存器，在做比较时if和0比较的话，在汇编上会比0以外的值少一条汇编指令，在循环里用到就能提高效率
+int end = max -1;
+for(i = 0; i &lt; end; i++) {}
+优化为：
+int end = max -1;
+for(i = end; i &gt; 0; i--) {}
+同理while(i&lt;end)也能类似方法优化
+</pre>
+
+
+<h3 id="toc_1.1.2">for循环判断条件里别用赋值语句</h3>
+<pre>
+for(i = 0; i &lt; (max – 1); i++) {
+优化为：
+int end = max -1;
+for(i = 0; i &lt; end; i++) {}
+</pre>
+
+<h3 id="toc_1.1.3"> 能在循环外作的尽量在循环外做</h3>
+<pre>
+看下面例子：
+for() {
+	a += (b + (c/2));
+}
+可以把赋值放在循环体外，优化为：
+tmp = c/2;
+for() {
+	a += (b + tmp);
+}
+</pre>
+
+<h3 id="toc_1.1.4">对递归或知道指定结果的，可直接指定常数返回</h3>
+<pre>
+这个不好理解点，先看个例子：
+int recursive (int n) {
+    if (!n) {
+        /* if n==0 return 1 directly */
+        return 1;
+    }
+    /*递归*/
+    unsigned long tmp = 1;
+    for (unsigned long i = 1; i &lt;= n; tmp *= i++)
+        ;
+    return tmp;
+}
+
+比如，我实际调用recursive (int n)时，用调试工具跟踪得知，
+调用递归(int n)时，输入参数n值很大几率（80%）为0，1，2，3这几个值，
+这样的情况，就可以做如下优化：
+int recursive(int n) {
+    unsigned long tmp = 1;
+    switch(n) {
+        case 0:
+        case 1:
+            break;
+        case 2:
+            tmp = 2;
+            break;
+        case 3:
+            tmp = 6;
+            break;
+        default :
+            {
+            /*递归*/
+            for (unsigned long i = 1; i &lt;= n; tmp *= i++)
+                ;
+            return tmp;
+            }
+    }
+    return tmp;
+｝
+</pre>
+
+<hr />
+<p>
+Last modified: 四  1 16 11:44:51 2014
+<hr />
+</p>
+
+        </div>
+
+	<center  style="font-family: fantasy; font-size: small; font-weight: normal; color: #009933">
+		Lang Jun&nbsp;&copy; 2012&nbsp; 
+			Generate by <a href="http://www.vim.org" target="_blank">Vim</a> &amp; <a href="http://code.google.com/p/vimwiki" target="_blank">VimWiki</a><br /> <a href="http://page2rss.com/rss/cc2aa194331b3f88317d80f58beeef6c"><img src="img/rss.png" border="0" /></a>
+		</center>
+
+<!-- http://clustrmaps.com/统计代码 -->
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://www1.i2r.a-star.edu.sg/~jlang/wiki', 'user' : 949078, 'server' : '4', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2011-11-02', 'lang' : 'zh', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www4.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www4.clustrmaps.com/user/1b6e7b56"><img src="http://www4.clustrmaps.com/stats/maps-no_clusters/www1.i2r.a-star.edu.sg-~jlang-wiki-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+
+	</body>
+</html>
+

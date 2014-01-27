@@ -1,0 +1,136 @@
+<html>
+	<head>
+        <title>Latex Skills of Jun Lang</title>
+		<meta name="keywords" content="Lang Jun, Jun Lang, Bill Lang, billlangjun" /> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="Stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+		<center><font style="font-family: fantasy; font-size: x-large; 
+font-weight: bold; color: #FF6600">Homepage of Jun Lang</font><br><font style="font-family: 华文行楷; font-size: small; 
+font-weight: normal; color: blue">Living without an aim is like sailing without a compass. </font></center>
+		<div class="content">
+        
+<h1 id="toc_1">Latex Related Skills</h1>
+<p>
+<a href="./wiki.html">Return</a>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Latex Related Skills</a>
+<ul>
+<li><a href="#toc_1.1">Install</a>
+<li><a href="#toc_1.2">Texmaker</a>
+</ul>
+</ul>
+</div>
+</p>
+
+<h2 id="toc_1.1">Install</h2>
+<p>
+第一步，安装基本的LaTeX环境：
+</p>
+<pre>
+sudo apt-get install texlive
+</pre>
+<p>
+或者
+</p>
+<pre>
+sudo apt-get install texlive-full latex-beamer dvipdfmx 
+</pre>
+<p>
+第二步，安装中文字体包。字体包中包含bsmi，bkai，gkai，gbsn四种中文字体。bsmi和bkai是Big5编码的宋体和楷体字；后两者gkai和gbsn分别处理简体中文楷体字和宋体字。
+</p>
+<pre>
+sudo apt-get install latex-cjk-all
+</pre>
+<p>
+至此，基本的配置就完成了。此时，我们可以新建一个tex文件并输入以下测试内容。正常情况下，编译这个tex文件就能在文档中显示中文了。值得说明的一点是，这些字体是不支持斜体格式的，但支持加粗。其实，在正式的中文排版中，如果要强调某些部分，是通过使用仿宋体或者楷体来实现，而不是像英文中那样通过斜体来实现。
+</p>
+<pre>
+\documentclass{article}
+\usepackage{CJKutf8}
+\begin{document}
+\begin{CJK}{UTF8}{gkai}
+这是一个楷体中文测试，处理简体字。
+\end{CJK}
+\begin{CJK}{UTF8}{gbsn}
+这是一个宋体中文测试，处理简体字。
+\end{CJK}
+\begin{CJK}{UTF8}{bkai}
+這是一個big5編碼的楷體中文測試，處理繁體文字。
+\end{CJK}
+\begin{CJK}{UTF8}{bsmi}
+這是一個个big5編碼的明體中文測試，處理繁體文字。
+\end{CJK}
+\end{document}
+</pre>
+<p>
+接下来，还要针对中文排版进行进一步的设置。
+</p>
+
+<p>
+首先，设置每一行的首行缩进。
+</p>
+<pre>
+/usepackage{indentfirst}
+/setlength{/parindent}{2em}
+</pre>
+<p>
+其次，中文文档习惯于使用“目录”、“插图目录”、“表格目录”、“参考文献”、“摘要”、“索引”、“表格”、“图”等字样作为文章特殊部分的标题，而 LaTeX 对于这些部分的标题默认是使用英文的，因此可以通过重定义宏的方式将其重定义为中文字样。
+</p>
+<pre>
+/renewcommand{/contentsname}{目录}
+/renewcommand{/listfigurename}{插图目录}
+/renewcommand{/listtablename}{表格目录}
+/renewcommand{/refname}{参考文献}
+/renewcommand{/abstractname}{摘要}
+/renewcommand{/indexname}{索引}
+/renewcommand{/tablename}{表}
+/renewcommand{/figurename}{图}
+</pre>
+<p>
+写到这里，用LaTeX来进行日常的中文排版就不成问题了。如果有进一步的需求，可以参看下面这篇《用LaTeX写漂亮学术论文》的文章。最后，希望大家都能喜欢LaTeX这个功能强大的排版软件。
+</p>
+
+<h2 id="toc_1.2">Texmaker</h2>
+<p>
+<a href="http://www.xm1math.net/texmaker/">http://www.xm1math.net/texmaker/</a>
+</p>
+<pre>
+sudo apt-get install texmaker
+</pre>
+<p>
+安装texmaker程序，它是一个图形化界面的Tex书写，编译，生成，预览集合为一体的程序。 与Windows操作系统中的WinTex界面很相似。
+</p>
+
+<p>
+Texlive-publishers包也可以安装一下， support for publishers, theses, standards, conferences, etc.
+</p>
+<pre>
+sudo apt-get install texlive-publishers
+</pre>
+<p>
+使用apt-cache show texlive-publishers命令可以看到它所支持的CTAN包的信息。
+</p>
+
+
+<hr />
+<p>
+Last modified: 四  1 16 11:49:46 2014
+<hr />
+</p>
+
+        </div>
+
+	<center  style="font-family: fantasy; font-size: small; font-weight: normal; color: #009933">
+		Lang Jun&nbsp;&copy; 2012&nbsp; 
+			Generate by <a href="http://www.vim.org" target="_blank">Vim</a> &amp; <a href="http://code.google.com/p/vimwiki" target="_blank">VimWiki</a><br /> <a href="http://page2rss.com/rss/cc2aa194331b3f88317d80f58beeef6c"><img src="img/rss.png" border="0" /></a>
+		</center>
+
+<!-- http://clustrmaps.com/统计代码 -->
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://www1.i2r.a-star.edu.sg/~jlang/wiki', 'user' : 949078, 'server' : '4', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2011-11-02', 'lang' : 'zh', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www4.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www4.clustrmaps.com/user/1b6e7b56"><img src="http://www4.clustrmaps.com/stats/maps-no_clusters/www1.i2r.a-star.edu.sg-~jlang-wiki-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+
+	</body>
+</html>
+

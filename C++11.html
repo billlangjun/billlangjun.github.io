@@ -1,0 +1,114 @@
+<html>
+	<head>
+        <title>Personal Wiki of Jun Lang</title>
+		<meta name="keywords" content="Lang Jun, Jun Lang, Bill Lang, billlangjun" /> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="Stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+		<center><font style="font-family: fantasy; font-size: x-large; 
+font-weight: bold; color: #FF6600">Homepage of Jun Lang</font><br><font style="font-family: 华文行楷; font-size: small; 
+font-weight: normal; color: blue">Living without an aim is like sailing without a compass. </font></center>
+		<div class="content">
+        
+<h1 id="toc_1" class="justcenter">Materials about C++11</h1>
+
+<p>
+<a href="./wiki.html">Return</a>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Materials about C++11</a>
+<ul>
+<li><a href="#toc_1.1">C++11 New Features</a>
+<li><a href="#toc_1.2">How to Upgrade Gcc to Gcc4.8 in Ubuntu OS</a>
+</ul>
+</ul>
+</div>
+</p>
+
+<h2 id="toc_1.1">C++11 New Features</h2>
+<ul>
+<li>
+<a href="C++11Features.html">C++11Features</a> from wikipedia
+
+<li>
+<a href="http://www.slideshare.net/Xorcerer/c11-11742077">SlidesOnC++11NewFeatures</a>
+
+</ul>
+
+<h2 id="toc_1.2">How to Upgrade Gcc to Gcc4.8 in Ubuntu OS</h2>
+<p>
+升级方案参考 <a href="http://www.maykiller.com/2012/ubuntu-install-gcc-4.8-with-set-default/">http://www.maykiller.com/2012/ubuntu-install-gcc-4.8-with-set-default/</a>
+</p>
+
+<p>
+1. 加入gcc源 
+</p>
+<pre>
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.8 g++-4.8
+</pre>
+
+<p>
+2. 测试是否安装成功
+</p>
+<pre>
+//方法一
+gcc-4.8 -v
+g++-4.8 -v
+//方法二
+ls /usr/bin/gcc* -l
+ls /usr/bin/g++* -l
+</pre>
+<p>
+3. 如果按照方法一来检测,只要出现:
+</p>
+<pre>
+"gcc version 4.8.0 (Ubuntu/Linaro 4.8.0-3ubuntu3~12.04)"即为安装成功!
+</pre>
+<p>
+如果按照方法二来检测,只要出现:
+</p>
+<pre>
+"/usr/bin/gcc-4.8"&amp;"/usr/bin/g++-4.8"即为安装成功!
+</pre>
+<p>
+安装成功后我们如果要使用gcc-4.8&amp;g++-4.8来编译的话,我们就得把gcc改为gcc-4.8,g++同理,改为g++-4.8来进行编译.
+如果你想直接使用gcc-4.8而不改变编译时gcc改为gcc-4.8的话,我们就可以更改一下gcc的软链接:
+</p>
+<pre>
+sudo rm /usr/bin/gcc
+sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
+sudo rm /usr/bin/g++
+sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
+</pre>
+<p>
+4. 现在我们用gcc -v来测试就能发现变为了4.8了!
+既然GCC-4.8使用了最新的C++11标准,但是我们为什么还是提示错误呢?解决方法如下:
+在编译的时候添加"-std=c++11"不带引号即可正常编译C++11标准的代码!
+</p>
+
+<p>
+<a href="./wiki.html">Return</a>
+</p>
+
+<hr />
+<p>
+Last modified: 四  1 16 11:49:05 2014
+<hr />
+</p>
+
+        </div>
+
+	<center  style="font-family: fantasy; font-size: small; font-weight: normal; color: #009933">
+		Lang Jun&nbsp;&copy; 2012&nbsp; 
+			Generate by <a href="http://www.vim.org" target="_blank">Vim</a> &amp; <a href="http://code.google.com/p/vimwiki" target="_blank">VimWiki</a><br /> <a href="http://page2rss.com/rss/cc2aa194331b3f88317d80f58beeef6c"><img src="img/rss.png" border="0" /></a>
+		</center>
+
+<!-- http://clustrmaps.com/统计代码 -->
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://www1.i2r.a-star.edu.sg/~jlang/wiki', 'user' : 949078, 'server' : '4', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2011-11-02', 'lang' : 'zh', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www4.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www4.clustrmaps.com/user/1b6e7b56"><img src="http://www4.clustrmaps.com/stats/maps-no_clusters/www1.i2r.a-star.edu.sg-~jlang-wiki-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+
+	</body>
+</html>
+

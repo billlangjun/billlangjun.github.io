@@ -1,0 +1,340 @@
+<html>
+	<head>
+        <title>Ubuntu Operating System Skills of Jun Lang</title>
+		<meta name="keywords" content="Lang Jun, Jun Lang, Bill Lang, billlangjun" /> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="Stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+		<center><font style="font-family: fantasy; font-size: x-large; 
+font-weight: bold; color: #FF6600">Homepage of Jun Lang</font><br><font style="font-family: 华文行楷; font-size: small; 
+font-weight: normal; color: blue">Living without an aim is like sailing without a compass. </font></center>
+		<div class="content">
+        
+<h1 id="toc_1">Ubuntu Operating System Related Skills</h1>
+<p>
+<a href="./wiki.html">Return</a>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Ubuntu Operating System Related Skills</a>
+<ul>
+<li><a href="#toc_1.1">System Backup, Restore, and Clone</a>
+<li><a href="#toc_1.2">File Management</a>
+<li><a href="#toc_1.3">FileSystem</a>
+<li><a href="#toc_1.4">Software</a>
+<li><a href="#toc_1.5">Redmine</a>
+<li><a href="#toc_1.6">LibreOffice</a>
+<li><a href="#toc_1.7">Request Ticket</a>
+<li><a href="#toc_1.8">Bitnami Serials Software</a>
+<li><a href="#toc_1.9">Linux Skills</a>
+<li><a href="#toc_1.10">Useful Commands Collection</a>
+</ul>
+</ul>
+</div>
+</p>
+
+<h2 id="toc_1.1">System Backup, Restore, and Clone</h2>
+<ul>
+<li>
+<a href="http://code.google.com/p/ucloner/">ucloner</a>: Backup/restore/clone your Ubuntu, and make Live-Ubuntu.
+
+</ul>
+
+<h2 id="toc_1.2">File Management</h2>
+<ul>
+<li>
+<a href="http://www.krusader.org/">krusader</a>: Twin panel file management for your desktop. Similar to TotalCommander for Windows.
+
+</ul>
+
+<h2 id="toc_1.3">FileSystem</h2>
+<ul>
+<li>
+Support filesystem type 'exfat'
+<pre>
+You need to install ExFat support in Ubuntu. You can do that by simply running the following commands:
+
+sudo apt-add-repository ppa:relan/exfat
+sudo apt-get update
+sudo apt-get install fuse-exfat
+</pre>
+
+</ul>
+
+<h2 id="toc_1.4">Software</h2>
+<ul>
+<li>
+How to install Adobe Reader on Ubuntu 12.04
+<pre>
+sudo apt-add-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo apt-get update
+sudo apt-get install acroread
+</pre>
+
+<li>
+Install Request Ticket on Ubuntu 12.04
+<pre>
+sudo apt-get install request-tracker3.8 rt3.8*
+</pre>
+
+</ul>
+
+<h2 id="toc_1.5">Redmine</h2>
+<ul>
+<li>
+Intall Bitnami-Redmine-2.0.3-1
+<pre>
+./bitnami-redmine-2.0.3-1-linux-x64-installer.run
+</pre>
+
+<li>
+Recover Bitnami-Redmine from 1.2.0.0 to 2.0.3-1
+<pre>
+1. cp old backed attachments to ~/redmine-2.0.3-1/apps/redmine/htdocs/files/
+2. replace new password by backed passwd of ~/redmine-2.0.3-1/apps/redmine/htdocs/config/database.yml
+3. start mysql: ~/redmine-2.0.3-1$ ./mysql/bin/mysql -u root -p
+4. delete database: drop database bitnami_redmine;
+5. create database: create database bitnami_redmine;
+6. grant all privileges: grant all privileges on bitnami_redmine.* to 'bitnami'@'localhost' identified by 'BITNAMI_USER_PASSWORD';
+7. flush privileges: flush privileges;
+8. exit mysql: exit;
+9. import database: ~/redmine-2.0.3-1$ ./mysql/bin/mysql -u root -p bitnami_redmine &lt; redmine_backup.sql
+10. cd ~/redmine-2.0.3-1/apps/redmine/htdocs
+11. ../../../ruby/bin/rake db:migrate RAILS_ENV=production
+12. ../../../ruby/bin/rake db:migrate:upgrade_plugin_migrations RAILS_ENV=production
+13. ../../../ruby/bin/rake db:migrate_plugins RAILS_ENV=production
+14. ./ctlscript.sh start
+</pre>
+
+</ul>
+
+<h2 id="toc_1.6">LibreOffice</h2>
+<ul>
+<li>
+Impress Presentation Templates: <a href="http://www-03.ibm.com/software/lotus/symphony/gallery.nsf/GalleryPresentations?OpenView&amp;Count=15">IBM's repository</a> <a href="http://extensions.services.openoffice.org/node/1338">Modern Impress Templates</a> <a href="http://templates.libreoffice.org/template-center?getCategories=Presentation&amp;getCompatibility=any&amp;sort_on=positive_ratings&amp;path=%2FLibreOffice-Templates%2Ftemplate-center&amp;portal_type=PSCProject&amp;SearchableText=">LibreOffice Templates Center</a>
+
+</ul>
+
+<h2 id="toc_1.7">Request Ticket</h2>
+<ul>
+<li>
+Install Request Ticket on Ubuntu 12.04
+<pre>
+sudo apt-get install request-tracker3.8 rt3.8*
+</pre>
+
+</ul>
+
+<h2 id="toc_1.8">Bitnami Serials Software</h2>
+<ul>
+<li>
+concrete5  最好的开源CMS系统，可以用于创建网站
+
+<li>
+Redmine 项目管理系统
+
+<li>
+Tracks 个人GTD系统
+
+<li>
+ownCloud 私有云
+
+<li>
+Pootle 在线翻译管理系统
+
+<li>
+LimeSurvey 在线投票系统
+
+<li>
+Gitorious 私人Github
+
+</ul>
+
+<h2 id="toc_1.9">Linux Skills</h2>
+<ul>
+<li>
+How to link Windows Shared Directory from Linux? 
+<pre>
+sudo mount -t cifs -o username=yourname,passwd='yourpasswd' //ipaddcrss/shareddir /mnt/samba
+</pre>
+
+</ul>
+
+<h2 id="toc_1.10">Useful Commands Collection</h2>
+<ul>
+<li>
+Modify dir can read, write, and excute only by owner
+<pre>
+chmod -R 700 dirpath
+</pre>
+
+<li>
+Stat shell running time
+<pre>
+date_start=`date|awk -F"[ :]" '{print $4*3600 + $5*60 +$6}'
+
+your shells
+
+date_end=`date|awk -F"[ :]" '{print $4*3600 + $5*60 +$6}'`
+time=`expr "$date_end" - "$date_start"`
+echo "the whole process takes $time seconds"
+</pre>
+
+<li>
+Multi-thread downloading
+<pre>
+lftp -c 'pget -n 10 your-file-path'
+</pre>
+
+<li>
+Check and kill port
+<pre>
+netstat -anp
+netstat -anp | grep 9312
+      tcp 0 0 0.0.0.0:9312 0.0.0.0:* LISTEN 11902/searchd
+kill -9 11902
+</pre>
+
+<li>
+Transfer Dos File into Linux Format. Dos File has 0d0a problem, should be replaced into 0a
+<pre>
+tr -d '\r' &lt; all.en.txt &gt; all.en.txt.dos2unix
+</pre>
+
+<li>
+count word frequency
+<pre>
+filename=$1
+tr " \011" "\012\012" &lt; $filename |sort |uniq -c|sort -nr
+</pre>
+<pre>
+【转】强大的shell-计算文件中单词出现次数并按次数排序
+当亲身使用了shell，方能体会其强大。之前我发表过一篇关于统计文件中单词出现次数，并按次数排序的c++程序，这可是当时微软和百度的笔试题目。而用shell实现该功能却只需要一句：tr " \011" "\012\012" &lt; $filename |tr -dc "[a-z][A-Z]\012" |sort |uniq -c|sort -nr
+下面是源程序：
+#!/bin/sh
+set -x
+echo "enter the filename "
+read filename
+tr " \011" "\012\012" &lt; $filename |tr -dc "[a-z][A-Z]\012" |sort |uniq -c|sort -nr
+set +x
+在这里用到了tr,sort,uniq三个过滤器以及管道，流重定向。
+tr " \011" "\012\012" &lt; $filename 读入文件filename，并将空格和tab（\011）转换为回车(\012)
+tr -dc "[a-z][A-Z]\012" 删除文件中非字母以及回车的其他字符（-c按条件取反，-d删除）
+sort 对单词排序
+uniq –c 统计单词出现的次数（-c输出重复次数）
+sort –nr对单词出现的次数排序（-r逆序，-n按照数值比较排序）
+</pre>
+
+</ul>
+
+
+<ul>
+<li>
+fast scan clockwise combine book
+<pre>
+for((i=1706;i&lt;=1780;i++)); do wget http://address/img0$i.pdf; done
+
+for((i=1688;i&lt;=1780;i++)); do pdftk img0$i.pdf cat 1E output convert/img0$i-2.pdf; done
+
+pdftk *.pdf cat output combined.pdf
+</pre>
+
+</ul>
+
+<ul>
+<li>
+delete comments of all c++ files in specific folder
+<pre>
+#!/bin/bash
+
+#delcomment.sh
+function: this shell script delete the comment in c/c++ source file
+
+
+function del_comment_file()
+{
+    #delete the comment line begin with '//comment'
+    sed -i "/^[ \t]*\/\//d" $file
+
+    #delete the commnet line end with '//comment'
+    sed -i "s/\/\/[^\"]*//" $file
+
+    #delete the comment only occupied one line '/* commnet */'
+    sed -i "s/\/\*.*\*\///" $file
+
+    #delete the comment that occupied many lines '/*comment
+    # *comment
+    # # */
+    sed -i "/^[ \t]*\/\*/,/.*\*\//d" $file
+}
+
+function del_comment()
+{
+    for file in `ls `; do
+        case $file in
+            *.c)
+            del_comment_file
+            ;;
+    *.cpp)
+        del_comment_file
+        ;;
+    *.h)
+        del_comment_file
+        ;;
+    *)
+        if [ -d $file ]; then
+            cd $file
+                del_comment
+                cd ..
+                fi
+                ;;
+    esac
+        done
+}
+
+DIR=$1
+
+if [ ! -e $DIR ]; then
+echo "The file or directory does not exist."
+exit 1;
+fi
+
+if [ -f $DIR ]; then
+file=`basename $DIR`
+if [[ `echo $DIR | grep /` == $DIR ]]; then
+cd `echo $DIR | sed -e "s/$file//"`
+del_comment_file
+else
+del_comment_file
+fi
+
+exit 0;
+fi
+
+if [ -d $DIR ]; then
+cd $DIR
+del_comment
+exit 0;
+fi
+</pre>
+
+</ul>
+<hr />
+<p>
+Last modified: 五  1 17 12:41:19 2014
+<hr />
+</p>
+
+        </div>
+
+	<center  style="font-family: fantasy; font-size: small; font-weight: normal; color: #009933">
+		Lang Jun&nbsp;&copy; 2012&nbsp; 
+			Generate by <a href="http://www.vim.org" target="_blank">Vim</a> &amp; <a href="http://code.google.com/p/vimwiki" target="_blank">VimWiki</a><br /> <a href="http://page2rss.com/rss/cc2aa194331b3f88317d80f58beeef6c"><img src="img/rss.png" border="0" /></a>
+		</center>
+
+<!-- http://clustrmaps.com/统计代码 -->
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://www1.i2r.a-star.edu.sg/~jlang/wiki', 'user' : 949078, 'server' : '4', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2011-11-02', 'lang' : 'zh', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www4.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www4.clustrmaps.com/user/1b6e7b56"><img src="http://www4.clustrmaps.com/stats/maps-no_clusters/www1.i2r.a-star.edu.sg-~jlang-wiki-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+
+	</body>
+</html>
+
