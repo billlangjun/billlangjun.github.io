@@ -1,0 +1,564 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PHP/MySQL三日通 
+    －第三天</title>
+<style type="text/css">
+<!--
+.p1{font-size:9pt;font-family:宋体;}
+.p2{font-size:9pt;font-family:宋体;line-height:14pt;}
+.p3{font-size:14.8px;font-family:宋体;}
+.p4{font-size:14.8px;font-family:宋体;line-height:14pt;}
+.p5{ border: 1px solid rgb(146,201,201) }
+.bc{ background-color: rgb(255,255,132) ;font-size:9pt;font-family:宋体;line-height:14pt;}
+.pt{font-size:14.8px;font-family:宋体;line-height:14pt; background-color: rgb(255,255,132) }
+a:hover{color:red;}
+a.t1:visited{color:red;}
+-->
+</style>
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="100%" class="p4"><p align="center"><p><script language='JavaScript1.1' src='/72890.js'></script>
+<br><strong><big><font color="#FF0000">PHP/MySQL三日通 
+    －第三天</font></big></strong></p>
+    <p align="center"><font color="#0000FF">原作者：</font><a
+    href="mailto:graeme@kc.co.nz">Graeme Merrall</a> </td>
+  </tr>
+  <tr>
+    <td width="100%"><hr noshade size="1" color="#000000">
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" class="p4"><div align="center"><center><table border="0" width="30%"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="100%" class="p4"><p align="center"><b>目录 </b></p>
+        <p><b>PHP/MySQL教程－<a href="php3MySQL_1.html">第一天</b> </a><br>
+        一、<a href="php3MySQL_1.html#1.1">PHP/MySQL简介</a><br>
+        二、<a href="php3MySQL_1.html#1.2">安装MySQL</a><br>
+        三、<a href="php3MySQL_1.html#1.3">安装PHP</a><br>
+        四、<a href="php3MySQL_1.html#1.4">第一个脚本</a><br>
+        五、<a href="php3MySQL_1.html#1.5">装载数据库</a><br>
+        六、<a href="php3MySQL_1.html#1.6">测试</a> </p>
+        <p><b>PHP/MySQL教程－<a href="php3MySQL_2.html">第二天</b> </a><br>
+        一、<a href="php3MySQL_2.html#2.1">while循环</a><br>
+        二、<a href="php3MySQL_2.html#2.2">if-else</a><br>
+        三、<a href="php3MySQL_2.html#2.3">第一个程序脚本</a><br>
+        四、<a href="php3MySQL_2.html#2.4">向服务器发送数据</a><br>
+        五、<a href="php3MySQL_2.html#2.5">修改数据</a><br>
+        六、<a href="php3MySQL_2.html#2.6">完整的程序</a> </p>
+        <p><b>PHP/MySQL教程－第三天</b> <br>
+        一、<a href="#3.1">基本函数</a><br>
+        二、<a href="#3.2">数据校验</a><br>
+        三、<a href="#3.3">处理常规表达式</a><br>
+        四、<a href="#3.4">简便方法</a><br>
+        五、<a href="#3.5">进阶技巧</a> </td>
+      </tr>
+    </table>
+    </center></div><hr noshade size="1" color="#000000">
+    <p><a name="3.1"></a><b>一、基本函数</b> </p>
+    <p>　　欢迎来到本教程的第三课，也是最后一课。如果您已经学过<a
+    href="php3MySQL_1.html">第一课</a>和<a href="php3MySQL_2.html">第二课</a>，那么您已经掌握了MySQL和PHP的安装及编程的基本知识。下面我们要介绍PHP的一些其他函数，这些函数可能会对您有用，使您的开发过程更加简单。首先我们来看看头文件。 
+    </p>
+    <p>　　大家应该知道头文件的一些基本概念吧？头文件是一个外部文件，它的内容被包含到主程序中。方法也十分简单：在程序文件中引用头文件名，这个头文件就会包含进来了。在PHP中使用头文件，会涉及两个函数：<tt>include()</tt>和<tt>require()</tt>。这两个函数差别很小，却很重要，所以我们要认真研究一下。<tt>require()</tt>函数工作方式<a
+    href="http://www.hotwired.com/webmonkey/html/97/39/index1a.html" target="_blank">与XSSI相类似</a>；不管在程序的哪个部分使用了这个函数，只有程序一开始运行，头文件的内容就被作为程序本身的一部分来处理。因此，如果您在一个条件判定语句中使用了<tt>require()</tt>函数，那么即使这个条件即使不为真，头文件也会被包含进来。 
+    </p>
+    <p>　　而<tt>include()</tt>函数只是在执行到这一条语句时才会把头文件内容包含进来。如果程序没运行到这里，那PHP是不会管它的。这就意味着，您在条件判定部分使用<tt>include</tt>时，它会完全按照您希望的那样工作。 
+    </p>
+    <p>　　还有，如果您用了<tt>require()</tt>函数，而您指定的头文件并不存在，那么程序将会停止运行并产生错误。如果您用了<tt>include()</tt>，程序会产生一个警告信息，但是会继续运行。您可以亲自试一下，运行下面的程序，然后把<tt>include()</tt>换成<tt>require()</tt>，再比较两个程序运行的结果。 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        <br>
+        <br>
+        &lt;?php<br>
+        <br>
+        include(&quot;emptyfile.inc&quot;);<br>
+        <br>
+        echo &quot;Hello World&quot;;<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        <br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;<br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>　　我喜欢把头文件的后缀名起成.inc，这样就可以把头文件和一般的程序区分开来。如果您也这么做，那么请您修改Web服务器软件的配置文件，使它能够把.inc文件也当作PHP文件来处理。否则，黑客们也许会猜到您的头文件名，然后用浏览器把头文件内容以纯文本格式显示出来。此时如果您的头文件中有些机密信息（如数据库口令等）那就糟糕了。 
+    </p>
+    <p>　　那么，您用头文件来做什么呢？很简单！把对所有程序都通用的那些内容放到头文件里。象HTML文件头啦，脚注啦，数据库连接代码啦，还有您自己定义的一些函数什么的。把下面的文字拷贝到一个文件中，保存为header.inc。 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" cellspacing="0"
+    cellpadding="0" bgcolor="#FFFFD2">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;?php<br>
+        <br>
+        $db = mysql_connect(&quot;localhost&quot;, &quot;root&quot;);<br>
+        <br>
+        mysql_select_db(&quot;mydb&quot;,$db);<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;html&gt;<br>
+        <br>
+        &lt;head&gt;<br>
+        <br>
+        &lt;title&gt;<br>
+        <br>
+        &lt;?php echo $title ?&gt;<br>
+        <br>
+        &lt;/title&gt;<br>
+        <br>
+        &lt;/head&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;center&gt;&lt;h2&gt;&lt;?php echo $title ?&gt;&lt;/h2&gt;&lt;/center&gt;<br>
+        <br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>　　然后再创建另外一个文件，名字是footer.txt，该文件可以包含一些程序结束时用到的一些文字和标记。 
+    </p>
+    <p>　　现在，我们再来创建一个文件，这个文件里面是真正的PHP程序代码。试一下下面的代码，当然，您要确认MySQL数据库服务器正在运行。 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;?php<br>
+        <br>
+        $title = &quot;Hello World&quot;;<br>
+        <br>
+        include(&quot;header.inc&quot;);<br>
+        <br>
+        $result = mysql_query(&quot;SELECT * FROM employees&quot;,$db);<br>
+        <br>
+        echo &quot;&lt;table border=1&gt;\n&quot;;<br>
+        <br>
+<!-- echo "&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Position&lt;/tr&gt;\n"; -->        <br>
+        echo &quot;&lt;tr&gt;&lt;td&gt;名字&lt;/td&gt;&lt;td&gt;职位&lt;/tr&gt;\n&quot;;<br>
+        <br>
+        while ($myrow = mysql_fetch_row($result)) {<br>
+        <br>
+        printf(&quot;&lt;tr&gt;&lt;td&gt;%s %s&lt;/td&gt;&lt;td&gt;%s&lt;/tr&gt;\n&quot;, 
+        $myrow[1], $myrow[2], $myrow[3]);<br>
+        <br>
+        }<br>
+        <br>
+        echo &quot;&lt;/table&gt;\n&quot;;<br>
+        <br>
+        include(&quot;footer.inc&quot;);<br>
+        <br>
+        ?&gt;</td>
+      </tr>
+    </table>
+    </center></div><p>　　看到发生了什么事了吗？头文件里的内容被合并到程序中，PHP把所有的代码都执行了一遍。注意在包含header.inc头文件之前<tt>$title</tt>是如何定义的。在header.inc中的代码可以访问到它的值。这样，网页的标题就被改掉了。现在，您可以在任何程序中使用header.inc头文件了，您所要做的不过是在每个主程序中为<tt>$title</tt>变量取一个合适的值。 
+    </p>
+    <p>　　头文件、HTML、条件判定语句，还有循环语句，这些东西加在一些，您就可以用最简练的代码，写出功能各异的各种复杂程序来。在与函数同时使用时，头文件更能发挥它的效力，我们后面就会看到。 
+    </p>
+    <p>　　接下去，我们会介绍精彩的部分：数据校验。<a href="#3.2">&gt;&gt;</a> 
+    </p>
+    <p><a name="3.2"></a><b>二、 数据校验</b> </p>
+    <p>　　想象一下这样的情形：我们把数据库都设计妥当了，现在请用户输入信息来写到数据库中去。假设您有一个字段是要求数字类型的信息，比如价格；而某个可爱的用户，却在这一栏里输入了文字信息，使得您的应用程序的执行过程出现了故障。对您在SQL语句中提供的文字类型的数据，MySQL数据库拒不接受，并向您提出了“严正抗议”。 
+    </p>
+    <p>　　怎么办呢？您要用数据校验来防止以上状况发生。 </p>
+    <p>　　简单地讲，数据校验是指我们对数据（通常是用户经由HTML表格传过来的）进行检查，看看它是否遵从一定的规则。规则可以是多种多样的，比如某一数据元素不能为空，或者要求某一数据项的内容必须满足一定的要求（例如前面的例子中要求必须是数字而不是文字，或者要求电子邮件地址中一定要包含一个“@”字等等）。 
+    </p>
+    <p>　　数据校验既可以在服务器一端作，也可以在客户端来作。PHP是用来作服务器一端的数据校验的，而JavaScript或其他客户端脚本编程语言则能够提供客户端的数据校验功能。本文说的是PHP，所以我们在这里着重介绍服务器端的校验。如果您想找一些现成的、在客户端运行的数据较验程序，那您可以去<a
+    href="http://www.hotwired.com/webmonkey/javascript/code_library/forms_data/"
+    target="_blank">网猴程序库</a>看看。 </p>
+    <p>　　暂时把数据库放在一边不谈，我们先来说说PHP的数据校验方法。如果您愿意（或者说，您想记录我们要校验的那些数据的话），您可以在前面所建的员工数据库的里加入其他字段，很简单，用MySQL的<a
+    href="http://www.mysql.com/Manual_chapter/manual_Reference.html#ALTER_TABLE"
+    target="_blank">ALTER 语句</a>就行了。 </p>
+    <p>　　有好几个PHP功能都可以用来作数据校验的工作，有些很简单，有些则复杂一些。其中<tt>strlen()</tt>是比较简单的一个函数，它能够告诉我们一个变量的长度。 
+    </p>
+    <p>　　更复杂一点儿的是<tt>ereg()</tt>，这个函数可以处理完整的<a
+    href="http://www.hotwired.com/webmonkey/geektalk/97/33/index3a.html" target="_blank">常规表达式</a>来进行复杂的校验。我不想就常规表达式讲得太深，因为许多书都是专门写这个问题的。不过我会在下一页中给出一些简单的例子。 
+    </p>
+    <p>　　我们先从一个简单的例子开始吧。下面这个程序要检查一个变量是否存在。 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        if ($submit) {<br>
+        <br>
+        if (!$first || !$last) {<br>
+        <br>
+<!-- 		$error = "Sorry! You didn't fill in all the fields!"; -->        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $error = &quot;对不起，您必须填写所有的栏目！&quot;;<br>
+        } else {<br>
+        <br>
+        // 处理表格输入内容<br>
+        <br>
+        echo &quot;谢谢！&quot;;<br>
+        <br>
+        }<br>
+        }<br>
+        <br>
+        if (!$submit || $error) {<br>
+        <br>
+        echo $error;<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;P&gt;<br>
+        <br>
+        &lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $PHP_SELF ?&gt;&quot;&gt;<br>
+        <br>
+<!-- 	FIELD 1: &lt;input type="text" name="first" value="&lt;?php echo $first ?&gt;"&gt;&lt;br&gt; -->        <br>
+        第一栏: &lt;input type=&quot;text&quot; name=&quot;名&quot; value=&quot;&lt;?php echo 
+        $first ?&gt;&quot;&gt;&lt;br&gt;<br>
+        <br>
+<!-- 	FIELD 2: &lt;input type="text" name="last" value="&lt;?php echo $last ?&gt;"&gt;&lt;br&gt; -->        <br>
+        第二栏: &lt;input type=&quot;text&quot; name=&quot;姓&quot; value=&quot;&lt;?php echo 
+        $last ?&gt;&quot;&gt;&lt;br&gt;<br>
+        <br>
+        &lt;input type=&quot;Submit&quot; name=&quot;submit&quot; value=&quot;输入信息&quot;&gt;<br>
+        <br>
+        &lt;/form&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+<!-- } // end if -->        <br>
+        } // if结束<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        <br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;<br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>　　这段程序中关键的地方是嵌套的条件判定语句。第一层检查用户是否按了发送数据的按钮。如果是，程序接着检查<tt>$first</tt>和<tt>$last</tt>两个变量是否都存在。那个 
+    || 符号表示“或”，而 ! 
+    符号表示“非”。那一句程序用一般语言描述就是“如果$first不存在或者$last不存在，那么就把 
+    $error变量置成下面的值。” </p>
+    <p>　　接下来，我们再进一步，检查一段文字的长度。这对用户口令的检查是很有必要的，因为您不想让某些懒惰的用户输入只有一、两个字的口令，可能会要求他们输入六位长的口令。 
+    </p>
+    <p>　　我们已经讲到<tt>strlen()</tt>这个函数了。它只是简单地返回一个数字，该数字等于被测变量中所包含的字符个数。这里，我修改一下上面的程序，检查一下<tt>$first</tt>与<tt>$last</tt>的长度。 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        if ($submit) {<br>
+        <br>
+        if (strlen($first) &lt; 6 || strlen($last) &lt; 6) {<br>
+        <br>
+<!-- 		$error = "Sorry! You didn't fill in all the fields!"; -->        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $error = &quot;对不起，您必须填写所有栏目！&quot;;<br>
+        <br>
+        } else {<br>
+        <br>
+<!-- 		// process form -->        <br>
+        // 处理表格输入内容<br>
+        <br>
+<!-- 		echo "Thank You!"; -->        <br>
+        echo &quot;谢谢！&quot;;<br>
+        <br>
+        }<br>
+        <br>
+        }<br>
+        <br>
+        <br>
+        if (!$submit || $error) {<br>
+        <br>
+        echo $error;<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;P&gt;<br>
+        <br>
+        &lt;form method=&quot;post&quot; action=&quot;&lt;?php echo $PHP_SELF ?&gt;&quot;&gt;<br>
+        <br>
+<!-- 	FIELD 1: &lt;input type="text" name="first" value="&lt;?php echo $first ?&gt;"&gt;&lt;br&gt; -->        <br>
+        第一栏: &lt;input type=&quot;text&quot; name=&quot;名&quot; value=&quot;&lt;?php echo 
+        $first ?&gt;&quot;&gt;&lt;br&gt;<br>
+        <br>
+<!-- 	FIELD 2: &lt;input type="text" name="last" value="&lt;?php echo $last ?&gt;"&gt;&lt;br&gt; -->        <br>
+        第二栏: &lt;input type=&quot;text&quot; name=&quot;姓&quot; value=&quot;&lt;?php echo 
+        $last ?&gt;&quot;&gt;&lt;br&gt;<br>
+        <br>
+        &lt;input type=&quot;Submit&quot; name=&quot;submit&quot; value=&quot;输入信息&quot;&gt;<br>
+        <br>
+        &lt;/form&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+<!-- } // end if -->        <br>
+        } // if结束<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;<br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>　　您可以执行一下这段程序，输入六个字或少于六个字的内容。这种校验很简单，但很有效。<a
+    href="#3.3">&gt;&gt;</a> </p>
+    <p><a name="3.3"></a><b>三、 处理常规表达式</b> </p>
+    <p>　　我们稍微讲讲用<tt>ereg()</tt>和<tt>eregi()</tt>两个函数处理常规表达式。前面我已经提过，这些函数有的很简单，有的很复杂，看您的实际需要而定。 
+    </p>
+    <p>　　使用常规表达式，您可以对一个字符串进行检查，搜索其中的一些结构模式，判定这些模式是否满足您的规定。最普遍的用法包括检查电子邮件地址是否有效（当然，即使这种办法判定有效，也不能保证邮件地址真的存在）。 
+    </p>
+    <p>　　我们在这里不细究常规表达式的复杂细节了，仅仅给出几个实例。您可以使用上一页中用过的表格 
+    - 
+    把相应的程序代码复制过来，添加到下面的代码段中，就可以看到它是怎样工作的。 
+    </p>
+    <p>　　首先，我们要确保表格中各栏只能输入字母。下面的常规表达式在用户输入一个或多个小写字母时判定为真，而输入数字是不允许的： 
+    </p>
+    <blockquote>
+      <tt><p>if (!ereg(&quot;[a-Z]&quot;, $first) || !ereg(&quot;[a-Z]&quot;, $last)) { </tt></p>
+    </blockquote>
+    <p>现在我们更进一步，检查字符串的长度是否是四到六位字符长。用<tt>[[:alpha:]]</tt>是检查字符是不是字母的简单方式。大括号内的数字检查字符个数。还要说明的是，^ 
+    和 $ 分别代表字符串的开始和结束。 </p>
+    <blockquote>
+      <tt><p>if (!ereg(&quot;^[[:alpha:]]{4,6}$&quot;, $first) || 
+      !ereg(&quot;^[[:alpha:]]{4,6}$&quot;, $last)) { </tt></p>
+    </blockquote>
+    <p>最后，我们来构造一个常规表达式，来检验电子邮件地址的有效性。这种检验方式的效果已经引发了相当多的讨论。没有什么东西是十全十美的，不过我下面给出的这段程序还是十分奏效的。 
+    </p>
+    <p>　　我这段宝贝程序是从PHP<a
+    href="http://www.progressive-comp.com/Lists/?l=php3-general#php3-general" target="_blank">邮件讨论组</a>上得来的。那可是个好去处 
+    - 常去看看吧。不错，这段程序看起来是有点乱糟糟的。 </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">if (!ereg('^[-!#$%&amp;\'*+\\./0-9=?A-Z^_`a-z{|}~]+'.<br>
+        <br>
+        '@'.<br>
+        <br>
+        '[-!#$%&amp;\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.'.<br>
+        <br>
+        '[-!#$%&amp;\'*+\\./0-9=?A-Z^_`a-z{|}~]+$', $last)) {</td>
+      </tr>
+    </table>
+    </center></div><p>别花太多时间来细究这段代码了，还是先到下一页内容吧。<a
+    href="#3.4">&gt;&gt;</a> </p>
+    <p><a name="3.4"></a><b>四、 简便方法</b> </p>
+    <p>　　前面的常规表达式怎么样？很有意思，是吧？要是在每个需要检查电子邮件地址的程序里都写上这么一段程序，那才真叫有意思呢？！想想看吧，得写那么乱七八糟的一段程序，还得写上那么多遍！...不过，当然了，还有更简便的方法。 
+    </p>
+    <p>　　还记得前面我们学过的头文件吗？它能让我们写一段程序，象是这个电子邮件地址的检查程序，然后把这段程序包含进多个程序里面去。这样，我们要改写这段程序时，只须改动一处就行了，不用修改多个文件。 
+    </p>
+    <p>　　但是，要做到这一点，我们必须用到函数。 </p>
+    <p>　　我们已经用过很多次函数了。每次我们查询数据库或检查字符串长度时，我们都是用函数来做的。这些函数是PHP自带的。如果您是位热心的程序员，您可以用自己编写的函数来扩充PHP本身的功能。但对本教程而言，这部分内容是太过高深了一点。我们要创建的函数不是那一种，而是写在PHP脚本程序内部的函数。 
+    </p>
+    <p>　　函数就是一段程序代码，我们可以把一个或多个值传给这段代码，然后这段代码会处理我们传给它的数据并返回一个值。根据实际需要，函数可以很简单，也可以十分复杂。但是只要我们传进去一个数，然后能得到一个数，您管它里面有是复杂还是简单呢！这就是函数的可爱之处。 
+    </p>
+    <p>　　PHP里的函数与C语言里的函数表现差不多。当我们定义函数时，必须指明函数需要接收什么样的数据。一开始好象不太好理解为什么它要接收数据进去，不过这样可以防止发生一些怪异的问题。函数之所以能做到这一点，是因为函数里面的变量都是私有变量，也就是说，它只在该函数内部存在。例如，您在程序中有一个变量叫<tt>$myname</tt>，如果您创建了一个函数，想让这个函数也使用那个<tt>$myname</tt>变量（值也相同），那是不行的。您可以在函数内部创建一个变量，名字也叫<tt>$myname</tt>，这两个变量可以各平相处，而各自取不同的值。不过我可不建议您这么做！您如果真的这么做了，等半年后您再来修改这样的程序时，您可能就会被弄糊涂了。 
+    </p>
+    <p>　　那我们现在就来创建一个函数，先来个简单的。我们要给它取个名字，指定它要接收什么的变量。在调用这个函数之前，我们还得定义这个函数。 
+    </p>
+    <p>　</p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        function&nbsp; addnum($first, $second) {<br>
+        <br>
+        $newnum = $first + $second;<br>
+        <br>
+        return $newnum;<br>
+        <br>
+        }<br>
+        <br>
+        echo addnum(4,5);<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;<br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>这就行了！首先，我们创建了第一个自己的函数。我们定义了两个新变量，<tt>$first</tt>和<tt>$second</tt>，注意它们是怎样被定义的。在调用这个函数时，要给这两个变量按它们出现的顺序赋好值 
+    - 4赋给<tt>$first</tt>，5赋给<tt>$second</tt>。然后我们简单地把这两个数加在一起，返回结果。“返回”在这里的意思是把结果送回去。在程序最后部分我们把数字9显示出来。 
+    </p>
+    <p>　　我们再来创建一个函数，让它对我们的数据库应用有点帮助。一个能妥善处理错误的函数怎么样？试试下面的程序： 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        function&nbsp; do_error($error) {<br>
+        <br>
+<!-- 	echo  "Hmm, looks like there was a problem here...&lt;br&gt;"; -->        <br>
+        echo&nbsp; &quot;噢，好象有点儿问题...&lt;br&gt;&quot;;<br>
+        <br>
+<!-- 	echo "The reported error was $error.\n&lt;br&gt;"; -->        <br>
+        echo &quot;系统报告的错误是：$error.\n&lt;br&gt;&quot;;<br>
+        <br>
+<!-- 	echo "Best you get hold of the site admin and let her know."; -->        <br>
+        echo &quot;最好是暂时关闭网站并通知系统管理员。&quot;;<br>
+        <br>
+        die;<br>
+        <br>
+        }<br>
+        <br>
+        <br>
+        if (!$db = @mysql_connect(&quot;localhost&quot;,&quot;user&quot;, &quot;password&quot;)) {<br>
+        <br>
+<!-- 	$db_error = "Could not connect to MySQL Server"; -->        <br>
+        $db_error = &quot;无法连接到MySQL数据库&quot;;<br>
+        <br>
+        do_error($db_error);<br>
+        }<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;</td>
+      </tr>
+    </table>
+    </center></div><p>　　在运行程序之前，试试关闭MySQL数据库，或使用错误的用户名或口令。您会看到友好的、有用的错误信息 
+    。细心的朋友会注意到在<tt>mysql_connect()</tt>函数之前的那个@符号。它会抑制系统错误信息，使得程序只能从do_error()函数那里得到有关的错误信息。您还会注意到，我们可以把一个在别处定义的变量作为参数传给函数，而不是在调用时直接赋一个值。 
+    </p>
+    <p>　　还记得我过函数使用的是私有变量吧？这话说得不完全对。事实上，您可以让函数访问到函数外面的变量。您可能要写一个函数，用它来查询数据库，然后把结果显示在多个网页中。您不想每次都把数据库连接标识都传给函数。在这种情况下，您可以把连接标识定义成一个全局的变量。例如： 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        function&nbsp; db_query($sql) {<br>
+        <br>
+        global $db;<br>
+        <br>
+        $result = mysql_query($sql,$db);<br>
+        <br>
+        return $result;<br>
+        <br>
+        }<br>
+        <br>
+        $sql = &quot;SELECT * FROM mytable&quot;;<br>
+        <br>
+        $result = db_query($sql);<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;</td>
+      </tr>
+    </table>
+    </center></div><p>　　这是个很简单的函数，但重要的是，您在调用这个函数时，不必传递<tt>$db</tt>变量 
+    - 您可以通过 global这个字使得函数可以访问到该变量。在这条语句中您可以定义多个全局变量，各个全局变量之间用逗号隔开。 
+    </p>
+    <p>　　最后，您可以使用可选参数，这样看起来您已经是真正的专家了。这里面关键的一点是，在函数中定义参数时要给它指定一个缺省值。然后您在调用这个函数时，如果不为该参数变量指定其他值，那么函数会自动把缺省值赋给这个变量。如果您指定了其他值，那么缺省值就不起作用了。 
+    </p>
+    <p>　　不太明白？比方说，您在连接数据库时，几乎总是连接到相同的服务器，并且使用相同的用户名和口令。不过有时候，您也需要连接到其他的服务器。看看下面的程序： 
+    </p>
+    <div align="center"><center><table border="0" width="70%" class="p4" bgcolor="#FFFFD2"
+    cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="5%">　</td>
+        <td width="95%">&lt;html&gt;<br>
+        <br>
+        &lt;body&gt;<br>
+        <br>
+        &lt;?php<br>
+        <br>
+        <br>
+        <br>
+        function&nbsp; db_connect($host = &quot;localhost&quot;, $user=&quot;username&quot;, 
+        $pass=&quot;graeme&quot;) {<br>
+        <br>
+        $db = mysql_connect($host, $username, $password);<br>
+        <br>
+        return $db;<br>
+        <br>
+        }<br>
+        <br>
+        <br>
+        $old_db = db_connect();<br>
+        <br>
+        <br>
+        <br>
+        $new_host = &quot;site.com&quot;;<br>
+        <br>
+        $new_db = db_connect($new_host);<br>
+        <br>
+        ?&gt;<br>
+        <br>
+        <br>
+        &lt;/body&gt;<br>
+        <br>
+        &lt;/html&gt;<br>
+        </td>
+      </tr>
+    </table>
+    </center></div><p>　　很“酷”是不是？在定义函数时，函数内部用到的变量也定义好了。第一次调用这个函数时，全部参数变量都是用的缺省值。第二次调用时，服务器名变了，而用户名和口令没有变。真是太棒了！ 
+    </p>
+    <p>　　想想您在什么地方还能用到函数。您可以用函数来作数据校验，来完成常用的功能，等等。在对Web网页上显示的文字作处理时，我用到了很多函数。我可以一次完成对文字的检查、解析和修改，来加入换行符和HTML标记等。 
+    </p>
+    <p>　　现在，剩下的就是我要给您的一些忠告了。<a href="#3.5">&gt;&gt;</a> 
+    </p>
+    <p><a name="3.5"></a><b>五、进阶技巧</b> </p>
+    <p>　　谈起数据库开发，我们有很多东西要学。如果您还没有学习过怎样进行数据库设计，和怎样在不同的平台上可靠地运行数据库，那么请您赶快去找本这方面的好书来读一读。这方面的能力会带给您无法估量的好处，从长远的眼光看，它会为您节省大量的时间与精力。还有，认真学学MySQL。这是一个复杂而有趣的数据库，有很多不错的文档。学学数据库的表结构、数据类型，还有SQL。如果您真正掌握了SQL，您可以完成相当多的实际工作。 
+    </p>
+    <p>　　最后，还有PHP。您想要的一切几乎都可以在PHP的网站上找到，包括全面的文档、邮件讨论组的讨论内容、程序代码库，等等。学习PHP的一个绝好的办法是研究用户手册中给出的实例，并查阅网上的代码。网友们发表的代码包括许多函数和类，您可以在自己的程序中直接使用，而不必自己从头来过。另外，如果您遇到问题，邮件讨论组是一个非常值得利用的资源。PHP的开发人员自己也会参加邮件讨论组，还有许多经验丰富的高手们，他们都可以帮助您解决问题。 
+    </p>
+    <p>　　祝您编程顺利，一切顺利！ </p>
+</td>
+  </tr>
+</table>
+
+<p>　</p>
+<SCRIPT src="/counter.js" type=text/javascript></SCRIPT>
+</BODY>
+</HTML>
